@@ -79,7 +79,7 @@ void runRegressionTests()
 		integer<128>("\xAA\xBB\xCC\xDD\x12\x34\x56\x78\x00\x00\x00\x00\x00\x00\x00\x00")
 		,"Test : 128-bit << 64, to 128-bit"
 	);
-
+	
 	assertEqual(
 		integer<64>(0xe6a4065acc120001)
 		*

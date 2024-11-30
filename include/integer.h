@@ -1343,18 +1343,18 @@ public:
 	{
 		integer<BITS * 2> result;
 
-#ifdef _MSC_VER
-		if (BITS == 64)
-		{
-			result.low() = _umul128(this->t, b, &result.high());
-			return result;
-		}
-		else if (BITS == 32)
-		{
-			result = __emulu(this->t, b);
-			return result;
-		}
-#endif
+// #ifdef _MSC_VER
+// 		if (BITS == 64)
+// 		{
+// 			result.low() = _umul128(this->t, b, &result.high());
+// 			return result;
+// 		}
+// 		else if (BITS == 32)
+// 		{
+// 			result = __emulu(this->t, b);
+// 			return result;
+// 		}
+// #endif
 
 		T s0, s1, s2, s3;
 
@@ -1371,9 +1371,13 @@ public:
 		x = s2 + (T)integer<BITS>(t).high() * integer<BITS>(b).high() + integer<BITS>(x).high();
 		s2 = integer<BITS>(x).low();
 		s3 = integer<BITS>(x).high();
-
+			
 		result.low() = s1 << 32 | s0;
-		result.high() = s3 << 32 | s2;
+
+		auto high = s3 << 32 | s2;
+		std::cout << high <<"\n";
+		// TODO something is wroing here
+		// result.high() = s3 << 32 | s2;
 		return result;
 	}
 
@@ -1396,7 +1400,8 @@ public:
 		x = s2 + (T)integer<BITS>(t).high() * integer<BITS>(b).high() + integer<BITS>(x).high();
 		s2 = integer<BITS>(x).low();
 		s3 = integer<BITS>(x).high();
-
+		
+		// TODO something is wroing here
 		result.low() = s1 << 32 | s0;
 		result.high() = s3 << 32 | s2;
 		return result;
